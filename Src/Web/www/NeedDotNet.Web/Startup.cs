@@ -4,7 +4,7 @@ using System.Linq;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(NeedDotNet.Web.Startup))]
+[assembly: OwinStartup(typeof (NeedDotNet.Web.Startup))]
 
 namespace NeedDotNet.Web
 {
