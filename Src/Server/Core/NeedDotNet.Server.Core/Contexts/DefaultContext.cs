@@ -12,6 +12,13 @@ namespace NeedDotNet.Server.Core.Contexts
             
         }
 
+        public virtual IDbSet<Group> Groups { get; set; }
+        public virtual IDbSet<UserGroup> UserGroups { get; set; }
+        public virtual IDbSet<RoleGroup> RoleGroups { get; set; }
+
+        public virtual IDbSet<Person> Persons { get; set; }
+        public virtual IDbSet<UserPerson> UserPersons { get; set; } 
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

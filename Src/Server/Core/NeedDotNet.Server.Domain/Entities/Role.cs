@@ -17,6 +17,8 @@ namespace NeedDotNet.Server.Domain.Entities
         public long? Updator { get; set; }
         public long? Remover { get; set; }
 
+        public virtual ICollection<RoleGroup> Groups { get; set; }
+
 
         public bool IsTransient()
         {

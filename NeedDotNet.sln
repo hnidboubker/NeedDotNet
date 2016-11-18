@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeedDotNet.Web", "Src\Web\w
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeedDotNet.Server.Core", "Src\Server\Core\NeedDotNet.Server.Core\NeedDotNet.Server.Core.csproj", "{1D08556A-D3D8-4C00-931F-D43CFD6198DA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeedDotNet.Server.Domain", "Src\Server\Core\NeedDotNet.Server.Domain\NeedDotNet.Server.Domain.csproj", "{1842B57A-C664-493C-80DE-DBDCA777E1AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1D08556A-D3D8-4C00-931F-D43CFD6198DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D08556A-D3D8-4C00-931F-D43CFD6198DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D08556A-D3D8-4C00-931F-D43CFD6198DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1842B57A-C664-493C-80DE-DBDCA777E1AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1842B57A-C664-493C-80DE-DBDCA777E1AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1842B57A-C664-493C-80DE-DBDCA777E1AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1842B57A-C664-493C-80DE-DBDCA777E1AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
