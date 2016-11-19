@@ -31,6 +31,7 @@ namespace NeedDotNet.Web.Controllers
                     var items = new ArchiveUserModel()
                     {
                         Id = result.Id,
+                        UserName = result.UserName,
                       
                     };
                     model.Add(items);
