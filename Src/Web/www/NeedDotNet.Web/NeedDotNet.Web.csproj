@@ -201,6 +201,7 @@
     <Compile Include="Infrastructure\RoleStore.cs" />
     <Compile Include="Infrastructure\UserStore.cs" />
     <Compile Include="Models\ArchiveUserModel.cs" />
+    <Compile Include="NinjectResolution\PersonModule.cs" />
     <Compile Include="NinjectResolution\RoleIdentityModule.cs" />
     <Compile Include="NinjectResolution\UserIdentityModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

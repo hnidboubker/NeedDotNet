@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using NeedDotNet.Web.Models;
 using NeedDotNet.Web.Services;
@@ -13,10 +11,13 @@ namespace NeedDotNet.Web.Controllers
     public class UsersController : Controller
     {
         protected UserManager UserManager;
+        protected IPersonService PersonService;
 
-        public UsersController(UserManager userManager)
+
+        public UsersController(UserManager userManager, IPersonService personService)
         {
-            this.UserManager = userManager;
+            UserManager = userManager;
+            PersonService = personService;
         }
 
         // GET: Users
@@ -32,6 +33,8 @@ namespace NeedDotNet.Web.Controllers
                     {
                         Id = result.Id,
                         UserName = result.UserName,
+                        Email = result.Email,
+                        IsActive = result.IsActive
                       
                     };
                     model.Add(items);
