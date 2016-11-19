@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System;
+using System.Threading;
+using Microsoft.AspNet.Identity;
 using NeedDotNet.Server.Domain.Entities;
 using NeedDotNet.Web.Infrastructure;
 
@@ -12,5 +14,7 @@ namespace NeedDotNet.Web.Services
         {
             Store = store;
         }
+
+        
     }
 }

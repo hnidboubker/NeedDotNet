@@ -3,8 +3,10 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using NeedDotNet.Server.Domain.Entities;
 using NeedDotNet.Web.Models;
+using NeedDotNet.Web.Models.Users;
 using NeedDotNet.Web.Services;
 
 namespace NeedDotNet.Web.Controllers
@@ -12,13 +14,15 @@ namespace NeedDotNet.Web.Controllers
     public class UsersController : Controller
     {
         protected UserManager UserManager;
+        protected UserService Userservice;
         protected IPersonService PersonService;
 
 
-        public UsersController(UserManager userManager, IPersonService personService)
+        public UsersController(UserManager userManager, IPersonService personService, UserService userservice)
         {
             UserManager = userManager;
             PersonService = personService;
+            Userservice = userservice;
         }
 
         // GET: Users
@@ -44,6 +48,27 @@ namespace NeedDotNet.Web.Controllers
             }
             return View(model);
         }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            var model = new RegisterUserModel();
+            return View(model);
+        }
+
+        public async Task<ActionResult> Create(RegisterUserModel model)
+        {
+            if (ModelState.IsValid)
+            {
+               PersonService.CreatePerson(model.FirstName, model.LastName);
+               Userservice.CreateUser(model.UserName, model.Email, model.Password);
+               
+                await Userservice.SaveChangesAsync();
+                return RedirectToAction("Index", "Users");
+
+            }
+            return View(model);
+        } 
 
         public string GetName
         {

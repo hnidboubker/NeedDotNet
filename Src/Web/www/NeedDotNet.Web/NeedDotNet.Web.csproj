@@ -189,6 +189,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="Models\Users\RegisterUserModel.cs" />
     <Compile Include="NinjectResolution\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
@@ -200,7 +201,7 @@
     </Compile>
     <Compile Include="Infrastructure\RoleStore.cs" />
     <Compile Include="Infrastructure\UserStore.cs" />
-    <Compile Include="Models\ArchiveUserModel.cs" />
+    <Compile Include="Models\Users\ArchiveUserModel.cs" />
     <Compile Include="NinjectResolution\PersonModule.cs" />
     <Compile Include="NinjectResolution\RoleIdentityModule.cs" />
     <Compile Include="NinjectResolution\UserIdentityModule.cs" />
@@ -208,6 +209,7 @@
     <Compile Include="Services\PersonService.cs" />
     <Compile Include="Services\RoleManager.cs" />
     <Compile Include="Services\UserManager.cs" />
+    <Compile Include="Services\UserService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

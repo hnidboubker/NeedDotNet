@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading;
 using System.Web;
+using Microsoft.AspNet.Identity;
 using NeedDotNet.Server.Core.Contexts;
 using NeedDotNet.Server.Domain.Entities;
 
@@ -11,6 +13,7 @@ namespace NeedDotNet.Web.Services
     public interface IPersonService
     {
         string GetPersonByFullName(string name);
+        void CreatePerson(string firstName, string lastName);
     }
 
     public class PersonService : IPersonService
@@ -27,6 +30,11 @@ namespace NeedDotNet.Web.Services
             var result = Repository.GetPersonByFullName(name);
             return result;
         }
+
+        public void CreatePerson(string firstName, string lastName)
+        {
+            Repository.CreatePerson(firstName, lastName);
+        }
     }
 
 
@@ -37,6 +45,7 @@ namespace NeedDotNet.Web.Services
         void Update(Person person);
         void Remove(Person person);
         string GetPersonByFullName(string name);
+        void CreatePerson(string firstName, string lastName);
     }
 
     public class PersonRepository : IPersonRepository
@@ -73,6 +82,31 @@ namespace NeedDotNet.Web.Services
         {
             var query = DbSet.SingleOrDefault(o => o.Name == name);
             return query.ToString();
+        }
+
+        public void CreatePerson(string firstName, string lastName)
+        {
+            var person = new Person()
+            {
+                Id = new long(),
+                FirstName = firstName,
+                LastName = lastName,
+                IsRemoved = false,
+                IsActive = false,
+                Created = DateTime.Now,
+                Creator = Thread.CurrentPrincipal.Identity.GetUserId<long>()
+            };
+
+            Add(person);
+
+            var result = new UserPerson()
+            {
+                PersonId = person.Id,
+                Person = person
+            };
+
+            var context = new DefaultContext();
+            context.UserPersons.Add(result);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NeedDotNet.Web.Models
+namespace NeedDotNet.Web.Models.Users
 {
     public class ArchiveUserModel
     {
