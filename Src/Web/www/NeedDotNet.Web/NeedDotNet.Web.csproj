@@ -177,10 +177,15 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\RoleStore.cs" />
+    <Compile Include="Infrastructure\UserStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\RoleManager.cs" />
+    <Compile Include="Services\UserManager.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -244,9 +249,20 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Users\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Server\Core\NeedDotNet.Server.Core\NeedDotNet.Server.Core.csproj">
+      <Project>{1D08556A-D3D8-4C00-931F-D43CFD6198DA}</Project>
+      <Name>NeedDotNet.Server.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Server\Core\NeedDotNet.Server.Domain\NeedDotNet.Server.Domain.csproj">
+      <Project>{1842B57A-C664-493C-80DE-DBDCA777E1AA}</Project>
+      <Name>NeedDotNet.Server.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
