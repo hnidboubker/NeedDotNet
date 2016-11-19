@@ -1,6 +1,7 @@
 ﻿using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
 using Microsoft.AspNet.Identity.EntityFramework;
+using NeedDotNet.Server.Core.Configurations;
+using NeedDotNet.Server.Core.Conventions;
 using NeedDotNet.Server.Domain.Entities;
 
 namespace NeedDotNet.Server.Core.Contexts
@@ -22,7 +23,10 @@ namespace NeedDotNet.Server.Core.Contexts
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            NeedConventions.Mapp(modelBuilder);
+            NeedConfigurations.Map(modelBuilder);
+            IdentityConfigurations.Map(modelBuilder);
         }
     }
 }
+
