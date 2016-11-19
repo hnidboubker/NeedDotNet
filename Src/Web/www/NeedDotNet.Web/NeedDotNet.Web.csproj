@@ -183,6 +183,7 @@
     </Compile>
     <Compile Include="Infrastructure\RoleStore.cs" />
     <Compile Include="Infrastructure\UserStore.cs" />
+    <Compile Include="Models\ArchiveUserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\RoleManager.cs" />
     <Compile Include="Services\UserManager.cs" />
