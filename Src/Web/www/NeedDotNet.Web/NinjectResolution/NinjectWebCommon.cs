@@ -3,6 +3,7 @@ using System.Web;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using NeedDotNet.Web.NinjectResolution;
 using Ninject;
+using Ninject.Modules;
 using Ninject.Web.Common;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
@@ -60,7 +61,13 @@ namespace NeedDotNet.Web.NinjectResolution
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-           
+            var modules = new INinjectModule[]
+            {
+                new UserIdentityModule(),
+                new RoleIdentityModule()
+            };
+
+            kernel.Load(modules);
         }        
     }
 }
