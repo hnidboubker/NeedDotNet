@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
 using NeedDotNet.Server.Core.Configurations;
 using NeedDotNet.Server.Core.Conventions;
@@ -26,6 +27,16 @@ namespace NeedDotNet.Server.Core.Contexts
             NeedConventions.Mapp(modelBuilder);
             NeedConfigurations.Map(modelBuilder);
             IdentityConfigurations.Map(modelBuilder);
+        }
+
+        public virtual async Task<int> SaveAsyn()
+        {
+            return await base.SaveChangesAsync();
+        }
+
+        public virtual int Save()
+        {
+            return base.SaveChanges();
         }
     }
 }

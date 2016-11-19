@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using NeedDotNet.Server.Core.Contexts;
 using NeedDotNet.Server.Domain.Entities;
 using NeedDotNet.Web.Models.Users;
 using NeedDotNet.Web.Services;
@@ -16,11 +15,12 @@ namespace NeedDotNet.Web.Controllers
     public class UsersController : Controller
     {
         protected UserManager UserManager;
-        protected UserService Userservice;
+        protected IUserService Userservice;
         protected IPersonService PersonService;
+        
 
 
-        public UsersController(UserManager userManager, IPersonService personService, UserService userservice)
+        public UsersController(UserManager userManager, IPersonService personService, IUserService userservice)
         {
             UserManager = userManager;
             PersonService = personService;
@@ -36,7 +36,7 @@ namespace NeedDotNet.Web.Controllers
             {
                 foreach (var result in results)
                 {
-                    var items = new ArchiveUserModel()
+                    var items = new ArchiveUserModel
                     {
                         Id = result.Id,
                         //Name = GetName,
@@ -58,7 +58,7 @@ namespace NeedDotNet.Web.Controllers
             var model = new RegisterUserModel();
             return View(model);
         }
-
+        [HttpPost]
         public async Task<ActionResult> Create( RegisterUserModel model)
         {
             if (ModelState.IsValid)
@@ -76,9 +76,9 @@ namespace NeedDotNet.Web.Controllers
                     Created = DateTime.Now,
                     Creator = Thread.CurrentPrincipal.Identity.GetUserId<long>()
                 };
-                Userservice.CreateUser(newUser);
-                var context = new DefaultContext();
-                context.SaveChanges();
+
+                Userservice.AddUser(newUser);
+                
 
                 var person = new Person();
                 var newPerson = new Person()
@@ -91,21 +91,30 @@ namespace NeedDotNet.Web.Controllers
                     Created = DateTime.Now,
                     Creator = Thread.CurrentPrincipal.Identity.GetUserId<long>()
                 };
-                
-                PersonService.CreatePerson(newPerson);
+
+                Userservice.AddPerson(newPerson);
                
-                context.SaveChanges();
-                AddUserToPerson(newUser, newPerson);
+                //context.SaveChanges();
+                var result = new UserPerson()
+                {
+                    User = newUser,
+                    UserId = newUser.Id,
+
+                    Person = newPerson,
+                    PersonId = newPerson.Id,
+                };
               
+
                 if (model != null)
                 {
 
                     
-                    newPerson.FirstName = model.FirstName;
-                    newPerson.LastName = model.LastName;
+                  
                     newUser.UserName = model.UserName;
                     newUser.Email = model.Email;
-                    newUser.Passsword = model.Password;
+                    newUser.Passsword = model.Password;  
+                    newPerson.FirstName = model.FirstName;
+                    newPerson.LastName = model.LastName;
 
                 }
               
@@ -117,31 +126,8 @@ namespace NeedDotNet.Web.Controllers
             return View(model);
         }
 
-        public UserPerson AddUserToPerson(User newUser, Person newPerson)
-        {
-            var context = new DefaultContext();
-            var result = new UserPerson()
-            {
-                User = newUser,
-                UserId = newUser.Id,
+      
 
-                Person = newPerson,
-                PersonId = newPerson.Id,
-            };
-
-            //context.UserPersons.Add(result);
-            context.SaveChanges();
-            return result;
-        }
-
-        public string GetName
-        {
-            get
-            {
-                var userPerson = new UserPerson();
-                var name = PersonService.GetPersonByFullName(userPerson.Person.Name);
-                return name;
-            }
-        }
+      
     }
 }

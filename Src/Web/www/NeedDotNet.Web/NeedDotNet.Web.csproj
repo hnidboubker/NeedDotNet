@@ -189,7 +189,10 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="Factories\DatabaseFactory.cs" />
+    <Compile Include="Factories\IDatabaseFactory.cs" />
     <Compile Include="Models\Users\RegisterUserModel.cs" />
+    <Compile Include="NinjectResolution\DataModule.cs" />
     <Compile Include="NinjectResolution\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
@@ -211,6 +214,7 @@
     <Compile Include="Services\UserManager.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="UoW\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />

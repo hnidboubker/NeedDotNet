@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
 using Microsoft.AspNet.Identity;
 using NeedDotNet.Server.Core.Contexts;
 using NeedDotNet.Server.Domain.Entities;
+using NeedDotNet.Web.Factories;
+using NeedDotNet.Web.UoW;
 
 namespace NeedDotNet.Web.Services
 {
@@ -15,15 +13,27 @@ namespace NeedDotNet.Web.Services
         User CreateUser(User user);
         Task CreateUserAsync(User user);
         Task<int> SaveChangesAsync();
+        void AddUser(User user);
+        void AddPerson(Person person);
     }
 
     public class UserService : IUserService
     {
+        protected DefaultContext Context;
         protected UserManager UserManager;
+        protected IDatabaseFactory DatabaseFactory;
+        protected IUnitOfWork UnitOfWork;
 
-        public UserService(UserManager userManager)
+        public UserService(UserManager userManager, IDatabaseFactory databaseFactory, IUnitOfWork unitOfWork)
         {
             UserManager = userManager;
+            this.DatabaseFactory = databaseFactory;
+            this.UnitOfWork = unitOfWork;
+        }
+
+        public DefaultContext DataContext
+        {
+            get { return Context ?? (Context = DatabaseFactory.Get()); }
         }
 
         public virtual User CreateUser(User user)
@@ -41,8 +51,17 @@ namespace NeedDotNet.Web.Services
 
         public virtual  async Task<int> SaveChangesAsync()
         {
-            var context = new DefaultContext();
-            return await context.SaveChangesAsync();
+            return await UnitOfWork.SaveChangesAsync();
+        }
+
+        public void AddUser(User user)
+        {
+            DataContext.Users.Add(user);
+        }
+
+        public void AddPerson(Person person)
+        {
+            DataContext.Persons.Add(person);
         }
     }
 }
