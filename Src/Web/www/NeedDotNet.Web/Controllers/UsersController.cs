@@ -96,20 +96,19 @@ namespace NeedDotNet.Web.Controllers
                
               
                 var result = new UserPerson()
-                {
-                    User = newUser,
+                { 
                     UserId = newUser.Id,
-
-                    Person = newPerson,
+                    User = newUser,
+                  
                     PersonId = newPerson.Id,
+                    Person = newPerson,
+                   
                 };
                 Userservice.AddUserToPerson(result.User, result.Person);
 
                 if (model != null)
                 {
-
                     
-                  
                     newUser.UserName = model.UserName;
                     newUser.Email = model.Email;
                     newUser.Passsword = model.Password;  
@@ -123,6 +122,7 @@ namespace NeedDotNet.Web.Controllers
                 return RedirectToAction("Index", "Users");
 
             }
+            ModelState.AddModelError("", "Oops");
             return View(model);
         }
       

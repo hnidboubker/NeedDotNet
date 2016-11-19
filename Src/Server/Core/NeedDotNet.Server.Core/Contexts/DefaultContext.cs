@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
 using NeedDotNet.Server.Core.Configurations;
@@ -32,6 +33,11 @@ namespace NeedDotNet.Server.Core.Contexts
         public virtual async Task<int> SaveAsyn()
         {
             return await base.SaveChangesAsync();
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+        {
+            return base.SaveChangesAsync(cancellationToken);
         }
 
         public virtual int Save()
