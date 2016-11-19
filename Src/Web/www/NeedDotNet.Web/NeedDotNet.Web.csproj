@@ -208,6 +208,7 @@
     <Compile Include="NinjectResolution\PersonModule.cs" />
     <Compile Include="NinjectResolution\RoleIdentityModule.cs" />
     <Compile Include="NinjectResolution\UserIdentityModule.cs" />
+    <Compile Include="NinjectResolution\UserServiceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\PersonService.cs" />
     <Compile Include="Services\RoleManager.cs" />

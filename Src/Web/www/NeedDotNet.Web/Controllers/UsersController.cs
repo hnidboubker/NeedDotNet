@@ -94,7 +94,7 @@ namespace NeedDotNet.Web.Controllers
 
                 Userservice.AddPerson(newPerson);
                
-                //context.SaveChanges();
+              
                 var result = new UserPerson()
                 {
                     User = newUser,
@@ -103,7 +103,7 @@ namespace NeedDotNet.Web.Controllers
                     Person = newPerson,
                     PersonId = newPerson.Id,
                 };
-              
+                user.Persons.Add(result);
 
                 if (model != null)
                 {

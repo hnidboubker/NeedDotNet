@@ -66,7 +66,8 @@ namespace NeedDotNet.Web.NinjectResolution
                 new UserIdentityModule(),
                 new RoleIdentityModule(),
                 new PersonModule(),
-                new DataModule()
+                new DataModule(),
+                new UserServiceModule(), 
             };
 
             kernel.Load(modules);
