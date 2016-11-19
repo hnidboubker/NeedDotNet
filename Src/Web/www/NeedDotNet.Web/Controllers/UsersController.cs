@@ -3,9 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
 using NeedDotNet.Server.Domain.Entities;
-using NeedDotNet.Web.Models;
 using NeedDotNet.Web.Models.Users;
 using NeedDotNet.Web.Services;
 
