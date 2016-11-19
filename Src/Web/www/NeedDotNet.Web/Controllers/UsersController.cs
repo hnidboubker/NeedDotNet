@@ -103,7 +103,7 @@ namespace NeedDotNet.Web.Controllers
                     Person = newPerson,
                     PersonId = newPerson.Id,
                 };
-                user.Persons.Add(result);
+                Userservice.AddUserToPerson(result.User, result.Person);
 
                 if (model != null)
                 {
@@ -125,9 +125,6 @@ namespace NeedDotNet.Web.Controllers
             }
             return View(model);
         }
-
-      
-
       
     }
 }

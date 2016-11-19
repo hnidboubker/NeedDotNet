@@ -15,6 +15,7 @@ namespace NeedDotNet.Web.Services
         Task<int> SaveChangesAsync();
         void AddUser(User user);
         void AddPerson(Person person);
+        void AddUserToPerson(User user, Person person);
     }
 
     public class UserService : IUserService
@@ -62,6 +63,18 @@ namespace NeedDotNet.Web.Services
         public void AddPerson(Person person)
         {
             DataContext.Persons.Add(person);
+        }
+
+        public void AddUserToPerson(User user, Person person)
+        {
+            var userPerson = new UserPerson()
+            {
+                UserId = user.Id,
+                User = user,
+                PersonId = person.Id,
+                Person = person
+            };
+            DataContext.UserPersons.Add(userPerson);
         }
     }
 }
