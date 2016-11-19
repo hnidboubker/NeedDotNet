@@ -12,7 +12,8 @@ namespace NeedDotNet.Web.Services
 {
     public interface IUserService
     {
-        void CreateUser(string userName, string email, string password);
+        User CreateUser(User user);
+        Task CreateUserAsync(User user);
         Task<int> SaveChangesAsync();
     }
 
@@ -25,27 +26,17 @@ namespace NeedDotNet.Web.Services
             UserManager = userManager;
         }
 
-        public void CreateUser(string userName, string email, string password)
+        public virtual User CreateUser(User user)
         {
-            var user = new User()
-            {
-                Id = new long(),
-                UserName = userName,
-                Email = email,
-                Passsword = password,
-                IsRemoved = false,
-                IsActive = false,
-                Created = DateTime.Now,
-                Creator = Thread.CurrentPrincipal.Identity.GetUserId<long>()
-            };
+            
             UserManager.Create(user);
-            var result = new UserPerson()
-            {
-                UserId = user.Id,
-                User = user
-            };
-            var context = new DefaultContext();
-            context.UserPersons.Add(result);
+            
+            return user;
+        }
+
+        public virtual async Task CreateUserAsync(User user)
+        {
+            throw new NotImplementedException();
         }
 
         public virtual  async Task<int> SaveChangesAsync()

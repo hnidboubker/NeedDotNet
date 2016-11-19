@@ -13,7 +13,7 @@ namespace NeedDotNet.Web.Services
     public interface IPersonService
     {
         string GetPersonByFullName(string name);
-        void CreatePerson(string firstName, string lastName);
+        Person CreatePerson(Person person);
     }
 
     public class PersonService : IPersonService
@@ -31,9 +31,10 @@ namespace NeedDotNet.Web.Services
             return result;
         }
 
-        public void CreatePerson(string firstName, string lastName)
+        public Person CreatePerson(Person person)
         {
-            Repository.CreatePerson(firstName, lastName);
+          Repository.Add(person);
+            return person;
         }
     }
 
@@ -45,7 +46,7 @@ namespace NeedDotNet.Web.Services
         void Update(Person person);
         void Remove(Person person);
         string GetPersonByFullName(string name);
-        void CreatePerson(string firstName, string lastName);
+        Person CreatePerson(string firstName, string lastName);
     }
 
     public class PersonRepository : IPersonRepository
@@ -84,7 +85,7 @@ namespace NeedDotNet.Web.Services
             return query.ToString();
         }
 
-        public void CreatePerson(string firstName, string lastName)
+        public Person CreatePerson(string firstName, string lastName)
         {
             var person = new Person()
             {
@@ -104,9 +105,11 @@ namespace NeedDotNet.Web.Services
                 PersonId = person.Id,
                 Person = person
             };
-
+            person.Users.Add(result);
             var context = new DefaultContext();
             context.UserPersons.Add(result);
+            
+            return person;
         }
     }
 }
