@@ -10,6 +10,7 @@ namespace NeedDotNet.Web.Services
 {
     public interface IPersonService
     {
+        string GetPersonByFullName(string name);
     }
 
     public class PersonService : IPersonService
@@ -20,6 +21,12 @@ namespace NeedDotNet.Web.Services
         {
             Repository = repository;
         }
+
+        public string GetPersonByFullName(string name)
+        {
+            var result = Repository.GetPersonByFullName(name);
+            return result;
+        }
     }
 
 
@@ -29,6 +36,7 @@ namespace NeedDotNet.Web.Services
         void Add(Person person);
         void Update(Person person);
         void Remove(Person person);
+        string GetPersonByFullName(string name);
     }
 
     public class PersonRepository : IPersonRepository
@@ -59,6 +67,12 @@ namespace NeedDotNet.Web.Services
         public virtual void Remove(Person person)
         {
             DbSet.Remove(person);
+        }
+
+        public virtual string GetPersonByFullName(string name)
+        {
+            var query = DbSet.SingleOrDefault(o => o.Name == name);
+            return query.ToString();
         }
     }
 }

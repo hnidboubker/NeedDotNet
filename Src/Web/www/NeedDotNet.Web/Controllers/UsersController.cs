@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using NeedDotNet.Server.Domain.Entities;
 using NeedDotNet.Web.Models;
 using NeedDotNet.Web.Services;
 
@@ -32,6 +33,7 @@ namespace NeedDotNet.Web.Controllers
                     var items = new ArchiveUserModel()
                     {
                         Id = result.Id,
+                        Name = GetName,
                         UserName = result.UserName,
                         Email = result.Email,
                         IsActive = result.IsActive
@@ -41,6 +43,16 @@ namespace NeedDotNet.Web.Controllers
                 }
             }
             return View(model);
+        }
+
+        public string GetName
+        {
+            get
+            {
+                var userPerson = new UserPerson();
+                var name = PersonService.GetPersonByFullName(userPerson.Person.Name);
+                return name;
+            }
         }
     }
 }
